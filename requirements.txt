@@ -1,9 +1,6 @@
 Flask
-sklearn
-pandas
 numpy
-matplotlib
 gunicorn
 nltk
-tensorflow
 pickle
+tensorflow

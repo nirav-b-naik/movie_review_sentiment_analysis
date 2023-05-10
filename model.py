@@ -16,9 +16,6 @@ import string
 # Array operation
 import numpy as np
 
-# For Dataframe
-import pandas as pd
-
 # Regex Operation
 import re
 
