@@ -1,4 +1,6 @@
-Flask
+flask
+numpy
+pandas
 gunicorn
 nltk
 pickle
