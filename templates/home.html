@@ -1,41 +1,47 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Movie Review Sentiment Analysis</title>
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review Sentiment Analysis</title>
+      <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
-
-<body>
-    <div class="login">
+<body style="background-color: rgb(138, 235, 154);">
+<center>
     	<h1>Movie Review Sentiment Analysis</h1>
-
-     <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post">
-        
-        <input type="text" name="Movie Review" placeholder="Movie Review" required="required" /><br>
-        
-         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    <form method="POST" action="/">
+        <label for="statement">Enter your statement:</label>
+        <input type="text" id="statement" name="statement" required>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>
+    
+    <h4>
+    <p>
+    Statement: {{statement}}
+    </p>
+    <p>
+    Sentiment: {{sentiment}}
+    </p>
+    <p>
+    Percent: {{percent}}
+    </p>
+    </h4>
 
-   <br>
-   <br>
-   
- </div>
- <p>
- {{review_text}}
- </p>
- <p>
- {{sentiment_text}}
- </p>
- <p>
- {{percent_text}}
- </p>
+    {% if sentiment %}
+        {% if sentiment == 'POSITIVE' %}
+            <img src="{{ url_for('static', filename='up.png') }}" style="height: 150px; width: 200px;" alt="Thumbs Up">
+        {% else %}
+            <img src="{{ url_for('static', filename='down.jpeg') }}" style="height: 150px; width: 200px;" alt="Thumbs Down">
+        {% endif %}
+    {% endif %}
 
+
+</center>
 </body>
 </html>

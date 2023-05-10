@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu May  4 14:01:38 2023
-
-@author: nirav-ubuntu
-"""
-
 import pickle
 from flask import Flask,request,app,jsonify,render_template,url_for
 from model import predict_sentiment
@@ -18,25 +10,16 @@ model = pickle.load(open('sentiment_model.pkl','rb'))
 ## Load the tokenizer
 tokenizer = pickle.load(open('sentiment_token.pkl','rb'))
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
+    if request.method == 'POST':
+        statement = request.form['statement']
+        percent, sentiment = predict_sentiment(statement,model,tokenizer)
+        percent = round((percent*100),2)
+        return render_template('home.html', sentiment=sentiment, statement=statement, percent=percent)
+
     return render_template('home.html')
 
-@app.route('/predict_api',methods=['GET','POST'])
-def predict_api():
-    data = request.form.values()
-    review = data[0]
-    percent, sentiment = predict_sentiment(review,model,tokenizer)
-    response = {'sentiment': sentiment, 'percent': percent}
-    return jsonify(response)
-
-@app.route('/predict',methods=['POST'])
-def predict():
-    data = [x for x in request.form.values()]
-    review = data[0]
-    percent, sentiment = predict_sentiment(review,model,tokenizer)
-    return render_template("home.html",review_text=f"\nReview: {review}",sentiment_text=f"\nSentiment: {sentiment}",percent_text=f"\nPercentage: {round(percent*100,2)}%")
-    
-if __name__=="__main__":
+if __name__ == '__main__':
     app.run(debug=True)
-  
+
