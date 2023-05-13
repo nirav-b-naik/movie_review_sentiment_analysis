@@ -4,3 +4,4 @@ pandas
 gunicorn
 nltk
 tensorflow
+streamlit

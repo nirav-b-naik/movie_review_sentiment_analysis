@@ -12,3 +12,22 @@ Create a new environment
 ```
 conda create -p venv python==3.9 -y
 ```
+
+```
+Clone from GitHub:
+git clone https://github.com/nirav-b-naik/movie_review_sentiment_analysis.git
+```
+
+```
+cd movie_review_sentiment_analysis
+```
+
+```
+To run app in flask format: 
+python app.py
+```
+
+```
+To run app in Streamlit:
+streamlit run streamlit_app.py
+```
