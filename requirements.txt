@@ -1,7 +1,6 @@
 flask
-numpy
 pandas
 gunicorn
 nltk
-tensorflow
+tensorflow==2.10
 streamlit
